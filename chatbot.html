@@ -62,29 +62,60 @@
         );
       }
 
-      const chatMessages = [
-        { message: "Hello chatbot", sender: "user" },
-        { message: "Hello! How can i help you", sender: "robot" },
-        { message: "can you get me todays date?", sender: "user" },
-        { message: "Today is September 27", sender: "robot" },
-        { message: "how about flip a coin", sender: "user" },
-        { message: "Sure! You got tails", sender: "robot" },
-      ];
+      function ChatMessages() {
+        const chatMessages = [
+          {
+            message: "Hello chatbot",
+            sender: "user",
+            key: "id-1",
+          },
+          {
+            message: "Hello! How can i help you",
+            sender: "robot",
+            key: "id-2",
+          },
+          {
+            message: "can you get me todays date?",
+            sender: "user",
+            key: "id-3",
+          },
+          {
+            message: "Today is September 27",
+            sender: "robot",
+            key: "id-4",
+          },
+          {
+            message: "how about flip a coin",
+            sender: "user",
+            key: "id-5",
+          },
+          {
+            message: "Sure! You got tails",
+            sender: "robot",
+            key: "id-6",
+          },
+        ];
 
-      const chatMessageComponents = chatMessages.map((chatMessage) => {
         return (
-          <ChatMessage
-            message={chatMessage.message}
-            sender={chatMessage.sender}
-          />
+          <div>
+            {chatMessages.map((chatMessage) => {
+              return (
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key={chatMessage.key}
+                />
+              );
+            })}
+          </div>
         );
-      });
+      }
 
       function App() {
         return (
           <div>
             <ChatInput message="hello chatbot" sender="user" />
-            {chatMessageComponents}
+            <chatMessages />
           </div>
         );
       }
