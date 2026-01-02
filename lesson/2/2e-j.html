@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      // using guard operator
+      function ProductDetails({ productName, price, discountPrice }) {
+        return (
+          <div>
+            <div>
+              <p>{productName}</p>
+              {!discountPrice && <p>${price}</p>}
+              {discountPrice && (
+                <div>
+                  <del>
+                    <p>${price}</p>
+                  </del>
+                  <p>Discount price: ${discountPrice}</p>
+                </div>
+              )}
+              <button>Add to Cart</button>
+            </div>
+          </div>
+        );
+      }
+
+      // using ternay operator
+      function ProductDetails2({
+        productName,
+        price,
+        discountPrice,
+        imageSrc,
+      }) {
+        return (
+          <div>
+            <img src={`../../assets/${imageSrc}`} alt="" width="100" />
+            <p>{productName}</p>
+            {discountPrice ? (
+              <div>
+                <del>
+                  <p>${price}</p>
+                </del>
+                <p>Discount price: ${discountPrice}</p>
+              </div>
+            ) : (
+              <p>${price}</p>
+            )}
+            <button>Add to Cart</button>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div>
+            <ProductDetails2
+              productName="Cotton socks"
+              price="10.90"
+              discountPrice="5.45"
+              imageSrc="cotton-socks.png"
+            />
+            <ProductDetails2 productName="Tennis Balls" price="6.00" />
+            <ProductDetails2 productName="Plain T-Shirt" price="7.99" />
+          </div>
+        );
+      }
+      const container = document.querySelector(".js-container");
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
