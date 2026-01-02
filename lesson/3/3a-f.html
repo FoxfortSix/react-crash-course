@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <!-- Container for the React application to render into -->
+    <div class="js-container"></div>
+
+    <!-- React Dependencies -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <!-- Babel for transpiling JSX -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      /**
+       * CountButtonClicked Component
+       * Displays a button that shows how many times it has been clicked and a reset button.
+       *
+       * @param {Object} props
+       * @param {number} props.buttonClicked - The current count of button clicks.
+       * @param {Function} props.setButtonClicked - Function to update the click count state.
+       */
+      function CountButtonClicked({ buttonClicked, setButtonClicked }) {
+        // I created this function to handle the increment logic.
+        // It calls setButtonClicked with the current value + 1.
+        function incrementNumber() {
+          setButtonClicked(buttonClicked + 1);
+        }
+
+        // I created this function to reset the counter to 0.
+        function resetCounter() {
+          setButtonClicked(0);
+        }
+
+        return (
+          <div>
+            {/*
+              I used an event listener 'onClick' to trigger 'incrementNumber' when the button is clicked.
+              I also added a ternary operator to conditionally render "time" or "times" based on the count.
+            */}
+            <button onClick={incrementNumber}>
+              Clicked {buttonClicked} {buttonClicked === 1 ? "time" : "times"}
+            </button>
+            <button onClick={resetCounter}>Reset</button>
+          </div>
+        );
+      }
+
+      /**
+       * App Component
+       * The main component that manages the shared state for the buttons.
+       */
+      function App() {
+        // I used the useState hook to create a state variable 'buttonClicked' initialized to 0.
+        // 'setButtonClicked' is the function I used to update this state.
+        const [buttonClicked, setButtonClicked] = React.useState(0);
+
+        return (
+          <div>
+            {/*
+              I passed the state and the updater function down as props to the CountButtonClicked components.
+              This allows both components to share and update the same state.
+            */}
+            <CountButtonClicked
+              buttonClicked={buttonClicked}
+              setButtonClicked={setButtonClicked}
+            />
+            <CountButtonClicked
+              buttonClicked={buttonClicked}
+              setButtonClicked={setButtonClicked}
+            />
+          </div>
+        );
+      }
+      // I selected the container element where the React app will be rendered.
+      const container = document.querySelector(".js-container");
+
+      // I created the React root and rendered the App component into the container.
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>

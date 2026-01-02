@@ -13,6 +13,7 @@
     <!-- React and ReactDOM are the core libraries for building React applications. -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
 
     <!-- Babel is used to compile JSX (JavaScript XML) into standard JavaScript that browsers can understand. -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
@@ -20,11 +21,7 @@
       /**
        * ChatInput Component
        * Renders an input field and a send button for user interaction.
-       */
-      /**
-       * ChatInput Component
-       * Renders an input field and a send button for user interaction.
-       * 
+       *
        * @param {Object} props
        * @param {Array} props.chatMessages - The current list of chat messages.
        * @param {Function} props.setChatMessages - Function to update the chat messages state.
@@ -48,7 +45,7 @@
          * crypto.randomUUID() generates a unique ID for the key prop.
          */
         function sendMessage() {
-          setChatMessages([
+          const newChatMessages = [
             ...chatMessages,
             {
               // I assign the current 'inputText' state to the message property.
@@ -56,9 +53,22 @@
               sender: "user",
               key: crypto.randomUUID(), // Generates a unique string ID
             },
-          ]);
+          ];
+
+          setChatMessages(newChatMessages);
           // Clear the input field after sending.
           setInputText("");
+
+          const response = Chatbot.getResponse(inputText);
+
+          setChatMessages([
+            ...newChatMessages,
+            {
+              message: response,
+              sender: "robot",
+              key: crypto.randomUUID(),
+            },
+          ]);
         }
 
         return (
@@ -111,11 +121,7 @@
       /**
        * ChatMessages Component
        * Renders a list of ChatMessage components based on an array of data.
-       */
-      /**
-       * ChatMessages Component
-       * Renders a list of ChatMessage components based on an array of data.
-       * 
+       *
        * @param {Object} props
        * @param {Array} props.chatMessages - The list of messages to display.
        */
