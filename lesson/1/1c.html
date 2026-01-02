@@ -4,14 +4,19 @@
     <title>React Basics</title>
   </head>
   <body>
+     <!-- Root container for the React app -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <!-- Babel for JSX compilation -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      name = "Azka";
+      name = "Azka"; // defined but not actively used in the rendering below in this specific snippet.
+      
+      // Creating a simple product card UI using JSX.
       const main = (
         <div>
           <p>Cotton socks</p>
@@ -19,6 +24,8 @@
           <button>Add to cart</button>
         </div>
       );
+      
+      // Render the component.
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(main);
     </script>

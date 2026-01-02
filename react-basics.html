@@ -4,20 +4,32 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Container for the React application to render into -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <!-- Babel for transpiling JSX -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      /**
+       * In React, I use JSX (JavaScript XML) to describe what the UI should look like.
+       * It looks like HTML, but it's actually JavaScript syntax extension.
+       */
       const main = (
         <div>
           <button>Hello</button>
           <p>welcome to react full course</p>
         </div>
       );
+
+      // 1. Select the DOM element where the React application will hang.
       const container = document.querySelector(".js-container");
+
+      // 2. Create the React Root and render the content ('main') into it.
+      // This is the standard way to initialize a React app in React 18+.
       ReactDOM.createRoot(container).render(main);
     </script>
   </body>

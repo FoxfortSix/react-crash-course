@@ -4,14 +4,24 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Root container -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <!-- Babel -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      // using guard operator
+      /**
+       * ProductDetails Component
+       * Demonstrates conditional rendering using the Guard Operator (&&).
+       * 
+       * Logic:
+       * - If 'discountPrice' is falsy (not provided), render normal price.
+       * - If 'discountPrice' is truthy, render original price (crossed out) and discount price.
+       */
       function ProductDetails({ productName, price, discountPrice }) {
         return (
           <div>
@@ -32,7 +42,15 @@
         );
       }
 
-      // using ternary operator
+      /**
+       * ProductDetails2 Component
+       * Demonstrates conditional rendering using the Ternary Operator.
+       * 
+       * Syntax: condition ? true_element : false_element
+       * Logic:
+       * - If 'discountPrice' exists, show discounted view.
+       * - Else, show normal view.
+       */
       function ProductDetails2({
         productName,
         price,
@@ -61,17 +79,20 @@
       function App() {
         return (
           <div>
+             {/* Example with discount */}
             <ProductDetails2
               productName="Cotton socks"
               price="10.90"
               discountPrice="5.45"
               imageSrc="cotton-socks.png"
             />
+             {/* Examples without discount */}
             <ProductDetails2 productName="Tennis Balls" price="6.00" />
             <ProductDetails2 productName="Plain T-Shirt" price="7.99" />
           </div>
         );
       }
+      
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(<App />);
     </script>

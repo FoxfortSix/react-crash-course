@@ -4,13 +4,21 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Root container -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+     <!-- Babel -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      /**
+       * LoginForm Component
+       * A functional component that renders a set of inputs and buttons.
+       * Functional components are reusable pieces of UI.
+       */
       function LoginForm() {
         return (
           <div>
@@ -26,6 +34,11 @@
         );
       }
 
+      /**
+       * App Component
+       * The main component that renders the layout and includes the LoginForm component.
+       * This demonstrates component composition (using one component inside another).
+       */
       function App() {
         return (
           <div>
@@ -34,6 +47,7 @@
           </div>
         );
       }
+      
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(<App />);
     </script>

@@ -4,19 +4,28 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Root container for the React app -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <!-- Babel for JSX compilation -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      // Define a JavaScript variable to be used in JSX.
+      // Note: 'name' is implicitly global here; in strict mode or modules, 'const' or 'let' should be used.
       name = "Azka";
+      
       const main = (
         <div>
+          {/* I use curly braces {} to embed JavaScript expressions (like variables) inside JSX. */}
           <p>my name is {name}</p>
         </div>
       );
+      
+      // Render the React element.
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(main);
     </script>

@@ -4,23 +4,32 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Root container -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+     <!-- Babel -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      // Define prices
       const SocksPrice = 10,
         TShirtPrice = 8;
+      
+      // Calculate calculation cost logic
       let productCost = SocksPrice + TShirtPrice * 2;
 
       console.log(productCost);
+      
       const main = (
         <div>
+           {/* Rendering the calculated 'productCost' variable directly in the UI */}
           <p>productCost: ${productCost}</p>
         </div>
       );
+      
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(main);
     </script>

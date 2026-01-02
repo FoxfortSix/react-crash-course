@@ -4,18 +4,24 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Root container for the React app -->
     <div class="js-container"></div>
 
+     <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+     <!-- Babel for JSX compilation -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      // Simple React Element: A button with text.
       const main = (
         <div>
           <button>Good job!</button>
         </div>
       );
+      
+      // Mount the React element to the DOM container.
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(main);
     </script>

@@ -4,18 +4,26 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Root container -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <!-- Babel -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      // Define constants for product prices.
       const SocksPrice = 10,
         TShirtPrice = 8;
+      
+      // Calculate total product cost.
       let productCost = SocksPrice + TShirtPrice * 2;
 
       console.log(productCost);
+      
+      // Static UI rendering (variables above are calculated but not dynamically inserted into JSX here).
       const main = (
         <div>
           <p>Cotton socks</p>
@@ -23,6 +31,7 @@
           <button>Add to cart</button>
         </div>
       );
+      
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(main);
     </script>

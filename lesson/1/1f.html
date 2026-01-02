@@ -4,22 +4,30 @@
     <title>React Basics</title>
   </head>
   <body>
+    <!-- Root container -->
     <div class="js-container"></div>
 
+    <!-- React Dependencies -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <!-- Babel -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      // 1. Calculate Product Cost
       const socksPrice = 10,
         tShirtPrice = 8;
       let productCost = socksPrice + tShirtPrice * 2;
 
+      // 2. Define Shipping Cost
       const shippingCost = 5;
 
+      // 3. Calculate Total Cost
       let totalCost = productCost + shippingCost;
 
       console.log(productCost);
+      
+      // Render all costs dynamically using JSX
       const main = (
         <div>
           <p>Product Cost: ${productCost}</p>
@@ -28,6 +36,7 @@
           <button>place your order</button>
         </div>
       );
+      
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(main);
     </script>
