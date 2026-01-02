@@ -21,15 +21,56 @@
        * ChatInput Component
        * Renders an input field and a send button for user interaction.
        */
-      function ChatInput() {
+      /**
+       * ChatInput Component
+       * Renders an input field and a send button for user interaction.
+       * 
+       * @param {Object} props
+       * @param {Array} props.chatMessages - The current list of chat messages.
+       * @param {Function} props.setChatMessages - Function to update the chat messages state.
+       */
+      function ChatInput({ chatMessages, setChatMessages }) {
+        // I use the useState hook to create a controlled input.
+        // 'inputText' tracks what the user types, initialized to an empty string.
+        const [inputText, setInputText] = React.useState("");
+
+        /**
+         * Event handler for the input field.
+         * Updates 'inputText' state whenever the user types.
+         */
+        function saveInputText(event) {
+          setInputText(event.target.value);
+        }
+
+        /**
+         * Function to add a new message to the chat.
+         * I use the spread operator (...) to copy the existing messages and add the new one.
+         * crypto.randomUUID() generates a unique ID for the key prop.
+         */
+        function sendMessage() {
+          setChatMessages([
+            ...chatMessages,
+            {
+              // I assign the current 'inputText' state to the message property.
+              message: inputText,
+              sender: "user",
+              key: crypto.randomUUID(), // Generates a unique string ID
+            },
+          ]);
+          // Clear the input field after sending.
+          setInputText("");
+        }
+
         return (
           <div>
             <input
               type="text"
               placeholder="send a message to textbox"
               size="30"
+              onChange={saveInputText}
+              value={inputText}
             />
-            <button>Send</button>
+            <button onClick={sendMessage}>Send</button>
           </div>
         );
       }
@@ -71,14 +112,46 @@
        * ChatMessages Component
        * Renders a list of ChatMessage components based on an array of data.
        */
-      function ChatMessages() {
+      /**
+       * ChatMessages Component
+       * Renders a list of ChatMessage components based on an array of data.
+       * 
+       * @param {Object} props
+       * @param {Array} props.chatMessages - The list of messages to display.
+       */
+      function ChatMessages({ chatMessages }) {
+        return (
+          <div>
+            {/*
+              I use the .map() method to iterate over the 'chatMessages' array
+              and transform each object into a <ChatMessage /> component.
+              The 'key' prop is essential for React to efficiently update the list.
+            */}
+            {chatMessages.map((chatMessage) => {
+              return (
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key={chatMessage.key}
+                />
+              );
+            })}
+          </div>
+        );
+      }
+
+      /**
+       * App Component
+       * The main component that serves as the entry point for the application structure.
+       */
+      function App() {
         /*
-          I use React.useState to create a stateful variable 'chatMessages'.
+          Lifting State Up:
+          I moved the 'chatMessages' state from ChatMessages to App so it can be shared.
           - 'chatMessages': Holds the current array of message objects.
-          - 'setChatMessages': A function to update the 'chatMessages' state.
-          Initial state is an array of default messages.
+          - 'setChatMessages': Function to update the state.
         */
-        const array = React.useState([
+        const [chatMessages, setChatMessages] = React.useState([
           {
             message: "Hello chatbot",
             sender: "user",
@@ -110,56 +183,16 @@
             key: "id-6",
           },
         ]);
-        const chatMessages = array[0];
-        const setChatMessages = array[1];
-
-        /**
-         * Function to add a new message to the chat.
-         * I use the spread operator (...) to copy the existing messages and add the new one.
-         * crypto.randomUUID() generates a unique ID for the key prop.
-         */
-        function sendMessage() {
-          setChatMessages([
-            ...chatMessages,
-            {
-              message: "test",
-              sender: "user",
-              key: crypto.randomUUID(), // Generates a unique string ID
-            },
-          ]);
-        }
 
         return (
           <div>
-            {/* The onClick event handler calls the sendMessage function when the button is clicked. */}
-            <button onClick={sendMessage}>Send message</button>
-            {/*
-              I use the .map() method to iterate over the 'chatMessages' array
-              and transform each object into a <ChatMessage /> component.
-              The 'key' prop is essential for React to efficiently update the list.
-            */}
-            {chatMessages.map((chatMessage) => {
-              return (
-                <ChatMessage
-                  message={chatMessage.message}
-                  sender={chatMessage.sender}
-                  key={chatMessage.key}
-                />
-              );
-            })}
-          </div>
-        );
-      }
-
-      /**
-       * App Component
-       * The main component that serves as the entry point for the application structure.
-       */
-      function App() {
-        return (
-          <div>
-            <ChatInput />
-            <ChatMessages />
+            {/* I pass the state and the setter function down as props to ChatInput so it can add new messages. */}
+            <ChatInput
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+            />
+            {/* I pass the state down to ChatMessages so it can display them. */}
+            <ChatMessages chatMessages={chatMessages} />
           </div>
         );
       }
