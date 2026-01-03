@@ -15,13 +15,19 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
       /**
+       * File: 3g-h.html
+       * Description: Exercises 3g and 3h.
+       * Demonstrates controlled components (InputText) and state management in React.
+       */
+
+      /**
        * InputText Component
        * Renders an input field that updates a greeting message in real-time.
        */
       function InputText() {
         // I used the useState hook to track the value of the input field.
         // 'inputResult' holds the current text, initialized to an empty string.
-        const [inputResult, setInputresult] = React.useState("");
+        const [inputResult, setInputResult] = React.useState("");
 
         /**
          * Event handler for the input field.
@@ -32,7 +38,7 @@
         // I created this function to handle the 'onChange' event.
         // I access the new value from 'event.target.value' and update the state.
         function renderTyping(event) {
-          setInputresult(event.target.value);
+          setInputResult(event.target.value);
         }
 
         /**
@@ -41,7 +47,7 @@
          */
         // I created this function to clear the input field by setting the state back to an empty string.
         function resetTyping() {
-          setInputresult("");
+          setInputResult("");
         }
 
         /**
@@ -50,7 +56,7 @@
          */
         // I created this function to set the input to a specific example name ("Azka").
         function exampleTyping() {
-          setInputresult("Azka");
+          setInputResult("Azka");
         }
 
         return (

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <!-- Container for the React application to render into -->
+    <div class="js-container"></div>
+
+    <!-- React Dependencies -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Babel for transpiling JSX -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      function Button() {
+        const [buttonStatus, setButtonStatus] = React.useState(false);
+
+        function changeButtonStatus() {
+          setButtonStatus((buttonStatus) => !buttonStatus);
+        }
+
+        return (
+          <div>
+            <button
+              className={`px-3 py-2 text-white text rounded-lg ${
+                buttonStatus ? "bg-green-600" : "bg-red-600"
+              }`}
+              onClick={changeButtonStatus}
+            >
+              {buttonStatus ? "ON" : "OFF"}
+            </button>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div>
+            <Button></Button>
+          </div>
+        );
+      }
+
+      // 1. Select the DOM element where the React application will hang.
+      const container = document.querySelector(".js-container");
+
+      // 2. Create the React Root and render the content ('main') into it.
+      // This is the standard way to initialize a React app in React 18+.
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>

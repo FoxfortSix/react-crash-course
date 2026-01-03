@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <!-- Container for the React application to render into -->
+    <div class="js-container"></div>
+
+    <!-- React Dependencies -->
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Babel for transpiling JSX -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      /**
+       * LoginForm Component
+       * A functional component that renders a set of inputs and buttons.
+       * Functional components are reusable pieces of UI.
+       */
+      function LoginForm() {
+        const [isSecret, setIsSecret] = React.useState(true);
+
+        function setIsSecretProcessor() {
+          setIsSecret((isSecret) => !isSecret);
+        }
+
+        return (
+          <div className="flex flex-col gap-2">
+            <div className="border p-2 max-w-90 rounded-lg">
+              <input type="email" placeholder="Email" />
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <div className="border p-2 max-w-90 rounded-lg">
+                <input
+                  type={isSecret ? "password" : "text"}
+                  placeholder="Password"
+                />
+              </div>
+              <button
+                onClick={setIsSecretProcessor}
+                className="border p-1 rounded-lg"
+              >
+                {isSecret ? "Show" : "Hide"}
+              </button>
+            </div>
+
+            <div className="flex gap-2">
+              <button className="bg-blue-400 text-white px-4 py-2 rounded-lg">
+                Login
+              </button>
+              <button className="bg-blue-400 text-white px-4 py-2 rounded-lg">
+                Sign up
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div>
+            <LoginForm />
+          </div>
+        );
+      }
+
+      // 1. Select the DOM element where the React application will hang.
+      const container = document.querySelector(".js-container");
+
+      // 2. Create the React Root and render the content ('main') into it.
+      // This is the standard way to initialize a React app in React 18+.
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
