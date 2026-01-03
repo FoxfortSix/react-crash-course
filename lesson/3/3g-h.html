@@ -23,17 +23,31 @@
         // 'inputResult' holds the current text, initialized to an empty string.
         const [inputResult, setInputresult] = React.useState("");
 
+        /**
+         * Event handler for the input field.
+         * Updates the 'inputResult' state with the current value of the input.
+         *
+         * @param {Object} event - The event object from the input change.
+         */
         // I created this function to handle the 'onChange' event.
         // I access the new value from 'event.target.value' and update the state.
         function renderTyping(event) {
           setInputresult(event.target.value);
         }
 
+        /**
+         * Resets the input field.
+         * Clears the 'inputResult' state by setting it to an empty string.
+         */
         // I created this function to clear the input field by setting the state back to an empty string.
         function resetTyping() {
           setInputresult("");
         }
 
+        /**
+         * Sets a specific example value.
+         * Updates 'inputResult' to "Azka".
+         */
         // I created this function to set the input to a specific example name ("Azka").
         function exampleTyping() {
           setInputresult("Azka");

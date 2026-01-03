@@ -14,6 +14,7 @@
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
     <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Babel is used to compile JSX (JavaScript XML) into standard JavaScript that browsers can understand. -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
@@ -72,15 +73,21 @@
         }
 
         return (
-          <div>
+          <div className="flex justify-center mt-5 gap-1 mb-3">
             <input
               type="text"
               placeholder="send a message to textbox"
               size="30"
               onChange={saveInputText}
               value={inputText}
+              className="border rounded-lg p-2 flex-grow"
             />
-            <button onClick={sendMessage}>Send</button>
+            <button
+              onClick={sendMessage}
+              className="text-white py-1 px-3 rounded-lg bg-green-500 active:bg-green700"
+            >
+              Send
+            </button>
           </div>
         );
       }
@@ -106,11 +113,17 @@
          * If the condition on the left is true, the element on the right is rendered.
          */
         return (
-          <div>
+          <div
+            className={`flex items-start gap-2 mb-2 ${
+              sender === "robot" ? "justify-start" : "justify-end"
+            }`}
+          >
             {sender === "robot" && (
               <img src="assets/robot.png" alt="Robot" width="50" />
             )}
-            {message}
+            <div className=" p-2 rounded-lg bg-gray-200 max-w-90">
+              {message}
+            </div>
             {sender === "user" && (
               <img src="assets/user.png" alt="User" width="50" />
             )}
@@ -126,8 +139,15 @@
        * @param {Array} props.chatMessages - The list of messages to display.
        */
       function ChatMessages({ chatMessages }) {
+        const chatMessagesRef = React.useRef(null);
+        React.useEffect(() => {
+          const containerElem = chatMessagesRef.current;
+          if (containerElem) {
+            containerElem.scrollTop = containerElem.scrollHeight;
+          }
+        }, [chatMessages]);
         return (
-          <div>
+          <div className="mt-5 overflow-auto" ref={chatMessagesRef}>
             {/*
               I use the .map() method to iterate over the 'chatMessages' array
               and transform each object into a <ChatMessage /> component.
@@ -191,14 +211,15 @@
         ]);
 
         return (
-          <div>
+          <div className="max-w-xl m-auto h-screen flex flex-col justify-between">
+            {/* I pass the state down to ChatMessages so it can display them. */}
+            <ChatMessages chatMessages={chatMessages} />
+
             {/* I pass the state and the setter function down as props to ChatInput so it can add new messages. */}
             <ChatInput
               chatMessages={chatMessages}
               setChatMessages={setChatMessages}
             />
-            {/* I pass the state down to ChatMessages so it can display them. */}
-            <ChatMessages chatMessages={chatMessages} />
           </div>
         );
       }
